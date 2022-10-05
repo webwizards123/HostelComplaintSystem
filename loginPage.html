@@ -19,13 +19,18 @@
             <div class="text-center mb-5 text-dark"></div>
             <div class="cardmy-5">
 
-              <form class="card-body cardbody-color p-lg-5" action="/login" method="post">
+              <form class="card-body cardbody-color p-lg-5" action="/" method="post">
 
                 <div class="text-center">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvYiw3pXHtUwd_rM15lgfiLbaFFP9u9L3ng&usqp=CAU" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                     width="200px" alt="profile">
                 </div>
-
+                <div>
+                  Who are you? <br>
+                  Student: <input type="radio" name="whoami" id="student" value="std">
+                  Admin :<input type="radio" name="whoami" id="admin" value="adm">
+                  Warden: <input type="radio" name="whoami" id="warden" value="wrd">
+                </div>
                 <div class="mb-3">
                   <input type="text" class="form-control" id="Username" aria-describedby="emailHelp"
                     placeholder="StudentID" name="stdid">
