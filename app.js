@@ -1,10 +1,10 @@
 const express = require('express');
-
 const app = express();
-
 const bodyParser = require('body-parser');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('css'));
+app.use(express.static('img'));
 
 app.get("/",function(req,res){
 	res.sendFile(__dirname +"/loginPage.html");
@@ -22,7 +22,7 @@ app.get("/adminHome",function(req,res){
 	res.sendFile(__dirname + "/adminHome.html");
 });
 
-app.get("/wardentHome",function(req,res){
+app.get("/wardenHome",function(req,res){
     res.sendFile(__dirname + "/wardenHome.html")
 });
 
