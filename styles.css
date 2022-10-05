@@ -1,5 +1,5 @@
 body{
-    background-color: #E7F6F2;
+    background-color: #FFECEF;
     text-align: center;
 }
 img.profile{
@@ -7,20 +7,22 @@ img.profile{
     height: 2rem;
 }
 div.inst{
-    color: #395B64;
+    color: #251B37;
     margin-left: 2%;
 }
 a.navbar-link{
     text-align: right;
 }
 nav{
-    background-color: #A5C9CA;
+    background-color: #FFCACA;
+
 }
 a.nav-link{
-    color: #395B64;
+    color: #ffffff;
 }
 div.right{
     text-align: right;
+    color: #ffffff;
 }
 #navbarSupportedContent{
     padding-right: 2%;
@@ -28,15 +30,23 @@ div.right{
 h1{
     padding: 3%;
     text-align: center;
-    color: #395B64;
+    color: #372948;
 }
 
 div.item{
-    color:#395B64;
+    color:#372948;
     margin-top: 2%;
     font-size: 2rem;
     font-weight: bold;
 }
 button.tic{
     margin-top: 2%;
+    background-color: #372948;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+a:link {
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
