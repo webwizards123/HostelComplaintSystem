@@ -10,8 +10,11 @@ app.get("/",function(req,res){
 	res.sendFile(__dirname +"/loginPage.html");
 });
 
-app.get("/register", function (req, res) {
-    res.sendFile(__dirname + '/registration.html');
+app.get("/register_student", function (req, res) {
+    res.sendFile(__dirname + '/registration_student.html');
+});
+app.get("/register_warden", function (req, res) {
+    res.sendFile(__dirname + '/registration_warden.html');
 });
 
 app.get("/studentHome",function(req,res){
