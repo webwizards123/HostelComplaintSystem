@@ -35,7 +35,7 @@ const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"Abhisql",
+    password:"abhijeet",
     database:"Hosteldb"
 })
 client.connect();
@@ -123,6 +123,45 @@ app.post("/register_student", function (req, res) {
     }
     
 });
+
+
+// warden
+app.post('/register_warden',function(req,res1){
+    
+    var w_id = req.body.wardid;
+    var w_first = req.body.fname;
+    var w_last = req.body.lname;
+    var w_name = w_first + w_last;
+    var w_cont = req.body.warcont;
+    var w_pass = req.body.passwd;
+    var w_cpass = req.body.cpasswd;
+    var w_hid = req.body.hid;
+    var w_hname = req.body.hname;
+    var w_hcont = req.body.hcont;
+
+
+    if(w_cpass == w_pass){
+        client.query(`insert into warden (warden_id,warden_name,warden_passwd,warden_cont) values('${w_id}' ,'${w_name}','${w_pass}','${w_cont}')`,function(err,res2){
+            if(err){
+                console.log(err.message);
+            }
+            else{
+                console.log("inserted");
+            }
+        })
+        client.query(`insert into hostel values('${w_hid}','${w_hname}','${w_hcont}','${w_id}')`,function(err,res3){
+            if(err){
+                console.log(err.message);
+            }
+            else{
+                console.log("inserted into hostel");
+                res1.redirect('/');
+            }
+        })
+    }
+
+
+})
 
 
 app.listen(3000, function () {
