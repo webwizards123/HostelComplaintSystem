@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard</title>
+    <title>Generate Complaint</title>
     
     <!-- Style sheets CSS and bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -52,15 +52,32 @@
     </div>
 </nav>
 
-<h1>
-    Hello User
-</h1>
+    <form class="card-body cardbody-color p-lg-5" action="/generate_complaint" method="post">
 
-<div class="details">
-    <div class="item">Enrollment No: Enrollment_no </div>
-    <div class="item">Name: Name </div>
-</div>
+                <div class="text-center">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvYiw3pXHtUwd_rM15lgfiLbaFFP9u9L3ng&usqp=CAU" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                    width="200px" alt="profile">
+                </div>
 
-<button class="btn btn-lg btn-dark tic"><a href="/generate_complaint" id="raise">Raise Ticket</a></button>
+                
+                <div class="mb-3">
+                  Category <br>
+                  Electricity <input type="radio" name="cat" value="Electricity"><br>
+                  Water <input type="radio" name="cat" value="Water">
+                  Hygiene <input type="radio" name="cat" value="Hygiene">
+                  Food <input type="radio" name="cat" value="Food">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control"  aria-describedby="emailHelp"
+                    placeholder="Title" name="title">
+                </div>
+                <textarea name="desc" id="" cols="100" rows="10" placeholder="Description"></textarea>
+
+                <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Generate</button></div>
+
+              </div>
+
+              </form>
+
 </body>
 </html>
