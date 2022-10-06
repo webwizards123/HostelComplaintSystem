@@ -171,13 +171,14 @@ app.post("/generate_complaint",function(req,res){
     let cat = req.body.cat;
     let title = req.body.title;
     let desc = req.body.desc;
-    let hid='jhhg';
-    client.query(`select hostel_ref_id from student where student_id = '${globalid}'`,(err1,res1)=>{
+    let hid;
+    let rno;
+    client.query(`select hostel_ref_id,room_no from student where student_id = '${globalid}'`,(err1,res1)=>{
         if(err1) console.log(err1.message);
         else{
             hid = res1.rows[0].hostel_ref_id;
-            console.log(cat);
-            client.query(`insert into complaints(category,description,student_ref_id,hostel_ref_id,status,title) values('${cat}','${desc}','${globalid}','${hid}','Pending','${title}')`, function (err2, res2) {
+            rno= res1.rows[0].room_no;
+            client.query(`insert into complaints(category,description,student_ref_id,hostel_ref_id,status,title,room_no) values('${cat}','${desc}','${globalid}','${hid}','Pending','${title}',${rno})`, function (err2, res2) {
                 if (err2) {
                     console.log(err2.message);
                 }
