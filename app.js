@@ -40,6 +40,8 @@ const client = new Client({
 })
 client.connect();
 
+
+
 app.post('/',function(req,res){
     var p = req.body.whoami;
     var p_id = req.body.stdid;
@@ -98,6 +100,29 @@ app.post('/',function(req,res){
         })
     }
 })
+
+
+
+app.post("/register_student", function (req, res) {
+    let s_id = req.body.stdid;
+    let s_name = req.body.fname +' '+ req.body.lname;
+    let s_gender = req.body.gender;
+    let s_hostelid = req.body.hostelid;
+    let s_contno = req.body.contno;
+    let s_roomno = req.body.roomno;
+    let s_passwd = req.body.passwd;
+    let s_cpasswd = req.body.cpasswd;
+    if(s_passwd==s_cpasswd){
+        client.query(`insert into student values('${s_id}','${s_name}','${s_passwd}','${s_gender}','${s_contno}','${s_hostelid}','${s_roomno}')`,(err,res2)=>{
+            if(err) console.log(err.message);
+            else{
+                console.log("Successfully added.");
+                res.redirect("/");
+            }
+        });
+    }
+    
+});
 
 
 app.listen(3000, function () {
