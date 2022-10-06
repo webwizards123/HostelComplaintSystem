@@ -29,27 +29,31 @@ app.get("/wardenHome",function(req,res){
     res.sendFile(__dirname + "/wardenHome.html")
 });
 
+app.get('/generate_complaint', function (req, res) {
+    res.sendFile(__dirname + "/generateComplaint.html");
+})
+
 // DATABASE connection
 const {Client} = require("pg");
 const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"abhijeet",
+    password:"Abhisql",
     database:"Hosteldb"
 })
 client.connect();
 
-
+var globalid;
 
 app.post('/',function(req,res){
     var p = req.body.whoami;
     var p_id = req.body.stdid;
     var p_passwd = req.body.passwd;
-    
+    globalid=p_id;
     if(p=='std'){
         client.query(`select student_passwd from student where student_id = '${p_id}'`, (err, res2) => {
-            console.log(res2);
+            // console.log(res2);
             if(err) console.log(err.message);
             else if (res2.rowCount == 0){
                 console.log("Student not registered");
@@ -163,6 +167,28 @@ app.post('/register_warden',function(req,res1){
 
 })
 
+app.post("/generate_complaint",function(req,res){
+    let cat = req.body.cat;
+    let title = req.body.title;
+    let desc = req.body.desc;
+    let hid='jhhg';
+    client.query(`select hostel_ref_id from student where student_id = '${globalid}'`,(err1,res1)=>{
+        if(err1) console.log(err1.message);
+        else{
+            hid = res1.rows[0].hostel_ref_id;
+            console.log(cat);
+            client.query(`insert into complaints(category,description,student_ref_id,hostel_ref_id,status,title) values('${cat}','${desc}','${globalid}','${hid}','Pending','${title}')`, function (err2, res2) {
+                if (err2) {
+                    console.log(err2.message);
+                }
+                else {
+                    console.log("inserted");
+                    res.redirect("/studentHome");
+                }
+            })
+        } 
+    })
+})
 
 app.listen(3000, function () {
     console.log('server running on port 3000')
