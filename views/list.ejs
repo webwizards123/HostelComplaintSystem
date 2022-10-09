@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    table, th, td ,tr{
+        border:1px solid black;
+        padding: 20px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table>
+
+        <tr>
+            <th>
+                Complaint_id
+            </th>
+            
+            <th>
+                Category
+            </th>
+            
+            <th>
+                description
+            </th>
+            
+            <th>
+                student_ref_id
+            </th>
+
+            <th>
+                hostel_ref_id
+            </th>
+            
+            <th>
+                status
+            </th>
+            
+            <th>
+                title
+            </th>
+            
+            <th>
+                roomno
+            </th>
+            
+        </tr>
+        
+        
+            <% for(var i=0 ; i<noc ; i++){ %>
+                <tr>
+                    <td><%= loc_id[i] %></td>
+                    <td><%= loc_cat[i] %></td>
+                    <td><%= loc_desc[i] %></td>
+                    <td><%= loc_sref[i] %></td>
+                    <td><%= loc_href[i] %></td>
+                    <td><%= loc_status[i] %></td>
+                    <td><%= loc_title[i] %></td>
+                    <td><%= loc_rno[i] %></td>
+                </tr>
+                
+            <% } %>
+        
+        
+
+
+
+
+    </table>
+   
+</body>
+</html>

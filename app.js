@@ -6,6 +6,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('css'));
 app.use(express.static('img'));
 
+//ejs
+
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+//
 app.get("/",function(req,res){
 	res.sendFile(__dirname +"/loginPage.html");
 });
@@ -33,13 +39,15 @@ app.get('/generate_complaint', function (req, res) {
     res.sendFile(__dirname + "/generateComplaint.html");
 })
 
+
+
 // DATABASE connection
 const {Client} = require("pg");
 const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"Abhisql",
+    password:"abhijeet",
     database:"Hosteldb"
 })
 client.connect();
@@ -189,6 +197,58 @@ app.post("/generate_complaint",function(req,res){
             })
         } 
     })
+})
+
+//view my complaints
+
+
+// var myid = 'satvik12';
+app.get('/view_my_complaints', function(req,res){
+    
+    var numberOfComplaints ;
+    var listOfComplaints_id = [];
+    var listOfComplaints_category = [];
+    var listOfComplaints_description = [];
+    var listOfComplaints_student_ref_id = [];
+    var listOfComplaints_hostel_ref_id = [];
+    var listOfComplaints_status = [];
+    var listOfComplaints_title = [];
+    var listOfComplaints_roomno = [];
+
+    client.query(`select count(*) from complaints where student_ref_id = '${globalid}'`, function(err,res1){
+        if(err){
+            console.log(err.message);
+        }
+        else{
+            numberOfComplaints = res1.rows[0].count;
+            console.log(numberOfComplaints);
+            
+            client.query(`select * from complaints where student_ref_id = '${globalid}'`,function(err2,res2){
+                if(err2){
+                    console.log(err2.message);
+                }
+                else{
+                    // listOfComplaints = res2.rows;
+                    for(var i=0 ; i<res2.rows.length ;i++){
+
+                        listOfComplaints_id.push(res2.rows[i].complaint_id);
+                        listOfComplaints_category.push(res2.rows[i].category);
+                        listOfComplaints_description.push(res2.rows[i].description);
+                        listOfComplaints_student_ref_id.push(res2.rows[i].student_ref_id);
+                        listOfComplaints_hostel_ref_id.push(res2.rows[i].hostel_ref_id);
+                        listOfComplaints_status.push(res2.rows[i].status);
+                        listOfComplaints_title.push(res2.rows[i].title);
+                        listOfComplaints_roomno.push(res2.rows[i].room_no);
+
+                    }        
+                    res.render("list", {noc : numberOfComplaints , loc_id : listOfComplaints_id, loc_cat : listOfComplaints_category , loc_desc : listOfComplaints_description ,loc_sref : listOfComplaints_student_ref_id , loc_href : listOfComplaints_hostel_ref_id, loc_status : listOfComplaints_status , loc_title : listOfComplaints_title , loc_rno : listOfComplaints_roomno});    
+                }
+            })
+
+        }
+    })
+
+
 })
 
 app.listen(3000, function () {
