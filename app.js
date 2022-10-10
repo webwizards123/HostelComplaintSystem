@@ -47,7 +47,7 @@ const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"abhijeet",
+    password:"Abhisql",
     database:"Hosteldb"
 })
 client.connect();
@@ -79,7 +79,7 @@ app.post('/',function(req,res){
     }
     else if(p=='adm'){
         client.query(`select admin_passwd from admin where admin_id = '${p_id}'`, (err, res2) => {
-            console.log(res2);
+            // console.log(res2);
             if (err) console.log(err.message);
             else if (res2.rowCount == 0) {
                 console.log("Admin not found");
@@ -96,13 +96,13 @@ app.post('/',function(req,res){
     }
     else{
         client.query(`select warden_passwd from warden where warden_id = '${p_id}'`, (err, res2) => {
-            console.log(res2);
+            // console.log(res2);
             if (err) console.log(err.message);
             else if (res2.rowCount == 0) {
                 console.log("warden not registered");
                 res.send("warden not registered");
             }
-            else if (p_passwd == res2.rows[0].student_passwd) {
+            else if (p_passwd == res2.rows[0].warden_passwd) {
                 res.redirect('/wardenHome');
             }
             else {
@@ -239,7 +239,6 @@ app.get('/view_my_complaints', function(req,res){
                         listOfComplaints_status.push(res2.rows[i].status);
                         listOfComplaints_title.push(res2.rows[i].title);
                         listOfComplaints_roomno.push(res2.rows[i].room_no);
-
                     }        
                     res.render("list", {noc : numberOfComplaints , loc_id : listOfComplaints_id, loc_cat : listOfComplaints_category , loc_desc : listOfComplaints_description ,loc_sref : listOfComplaints_student_ref_id , loc_href : listOfComplaints_hostel_ref_id, loc_status : listOfComplaints_status , loc_title : listOfComplaints_title , loc_rno : listOfComplaints_roomno});    
                 }
@@ -249,6 +248,41 @@ app.get('/view_my_complaints', function(req,res){
     })
 
 
+})
+
+
+app.get('/view_complaints_warden',function(req,res){
+    client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}')`, function(err,res2){
+        if(err){
+            console.log(err.message);
+            res.send(err.message);
+        }
+        else{
+            res.render("viewWarden",{arr:res2.rows})
+        }
+    })
+})
+app.get('/view_complaints_admin',function(req,res){
+    client.query(`select * from Complaints where auth='Admin'`, function(err,res2){
+        if(err){
+            console.log(err.message);
+            res.send(err.message);
+        }
+        else{
+            res.render("viewAdmin",{arr:res2.rows})
+        }
+    })
+})
+
+app.post('/view_complaints_warden',function(req,res){
+    var cid = req.body.cid;
+    client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res){
+        if(err){
+            console.log(err.message);
+            res.send(err.message);
+        }
+    })
+    res.redirect('/view_complaints_warden');
 })
 
 app.listen(3000, function () {
