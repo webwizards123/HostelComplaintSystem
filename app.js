@@ -24,15 +24,46 @@ app.get("/register_warden", function (req, res) {
 });
 
 app.get("/studentHome",function(req,res){
-	res.sendFile(__dirname + "/studentHome.html");
+	// res.sendFile(__dirname + "/studentHome.html");
+    client.query(`select student_name,hostel_ref_id,room_no from student where student_id='${globalid}'`,function(err,res2){
+        if(err){
+            res.send("<h1>" + err.message +"</h1>");
+        }
+        else{
+            res.render("studentHome", { name:res2.rows[0].student_name, roomno:res2.rows[0].room_no , hname:res2.rows[0].hostel_ref_id });
+        }
+    })
+    
 });
 
 app.get("/adminHome",function(req,res){
-	res.sendFile(__dirname + "/adminHome.html");
+    client.query(`select admin_name from admin where admin_id='${globalid}'`, function (err, res2) {
+        if (err) {
+            res.send("<h1>" + err.message + "</h1>");
+        }
+        else {
+            res.render("adminHome", { name: res2.rows[0].admin_name });
+        }
+    })
 });
 
 app.get("/wardenHome",function(req,res){
-    res.sendFile(__dirname + "/wardenHome.html")
+    client.query(`select warden_name from warden where warden_id='${globalid}'`, function (err2, res2) {
+        if (err2) {
+            res.send("<h1>" + err2.message + "</h1>");
+        }
+        else {
+            client.query(`select hostel_id from hostel where warden_ref_id='${globalid}'`, function (err3, res3) {
+                if (err3) {
+                    res.send("<h1>" + err3.message + "</h1>");
+                }
+                else {
+                    res.render("wardenHome", { name: res2.rows[0].warden_name, hname:res3.rows[0].hostel_id });
+                }
+            })
+            
+        }
+    })
 });
 
 app.get('/generate_complaint', function (req, res) {
@@ -65,14 +96,14 @@ app.post('/',function(req,res){
             if(err) console.log(err.message);
             else if (res2.rowCount == 0){
                 console.log("Student not registered");
-                res.send("Student not registered");
+                res.send("<h1>Student not registered</h1>");
             }
             else if(p_passwd==res2.rows[0].student_passwd){
                 res.redirect('/studentHome');
             }
             else{
                 console.log("Password Not Matched.");
-                res.send("Password Not Matched.");
+                res.send("<h1>Password Not Matched.</h1>");
             }
         })
         
@@ -83,33 +114,36 @@ app.post('/',function(req,res){
             if (err) console.log(err.message);
             else if (res2.rowCount == 0) {
                 console.log("Admin not found");
-                res.send("Admin not found");
+                res.send("<h1>Admin not found</h1>");
             }
             else if (p_passwd == res2.rows[0].admin_passwd) {
                 res.redirect('/adminHome');
             }
             else {
                 console.log("Password Not Matched.");
-                res.send("Password Not Matched.");
+                res.send("<h1>Password Not Matched.</h1>");
             }
         })
     }
-    else{
+    else if(p=='wrd'){
         client.query(`select warden_passwd from warden where warden_id = '${p_id}'`, (err, res2) => {
             // console.log(res2);
             if (err) console.log(err.message);
             else if (res2.rowCount == 0) {
                 console.log("warden not registered");
-                res.send("warden not registered");
+                res.send("<h1>warden not registered</h1>");
             }
             else if (p_passwd == res2.rows[0].warden_passwd) {
                 res.redirect('/wardenHome');
             }
             else {
                 console.log("Password Not Matched.");
-                res.send("Password Not Matched.");
+                res.send("<h1>Password Not Matched.<h1>");
             }
         })
+    }
+    else{
+        res.send("<h1>Please select a user</h1>");
     }
 })
 
@@ -204,50 +238,14 @@ app.post("/generate_complaint",function(req,res){
 
 // var myid = 'satvik12';
 app.get('/view_my_complaints', function(req,res){
-    
-    var numberOfComplaints ;
-    var listOfComplaints_id = [];
-    var listOfComplaints_category = [];
-    var listOfComplaints_description = [];
-    var listOfComplaints_student_ref_id = [];
-    var listOfComplaints_hostel_ref_id = [];
-    var listOfComplaints_status = [];
-    var listOfComplaints_title = [];
-    var listOfComplaints_roomno = [];
-
-    client.query(`select count(*) from complaints where student_ref_id = '${globalid}'`, function(err,res1){
-        if(err){
-            console.log(err.message);
+    client.query(`select * from complaints where student_ref_id = '${globalid}'`,function(err2,res2){
+        if(err2){
+            console.log(err2.message);
         }
         else{
-            numberOfComplaints = res1.rows[0].count;
-            console.log(numberOfComplaints);
-            
-            client.query(`select * from complaints where student_ref_id = '${globalid}'`,function(err2,res2){
-                if(err2){
-                    console.log(err2.message);
-                }
-                else{
-                    // listOfComplaints = res2.rows;
-                    for(var i=0 ; i<res2.rows.length ;i++){
-
-                        listOfComplaints_id.push(res2.rows[i].complaint_id);
-                        listOfComplaints_category.push(res2.rows[i].category);
-                        listOfComplaints_description.push(res2.rows[i].description);
-                        listOfComplaints_student_ref_id.push(res2.rows[i].student_ref_id);
-                        listOfComplaints_hostel_ref_id.push(res2.rows[i].hostel_ref_id);
-                        listOfComplaints_status.push(res2.rows[i].status);
-                        listOfComplaints_title.push(res2.rows[i].title);
-                        listOfComplaints_roomno.push(res2.rows[i].room_no);
-                    }        
-                    res.render("list", {noc : numberOfComplaints , loc_id : listOfComplaints_id, loc_cat : listOfComplaints_category , loc_desc : listOfComplaints_description ,loc_sref : listOfComplaints_student_ref_id , loc_href : listOfComplaints_hostel_ref_id, loc_status : listOfComplaints_status , loc_title : listOfComplaints_title , loc_rno : listOfComplaints_roomno});    
-                }
-            })
-
+            res.render("list", {arr:res2.rows});    
         }
     })
-
-
 })
 
 
@@ -266,7 +264,7 @@ app.get('/view_complaints_admin',function(req,res){
     client.query(`select * from Complaints where auth='Admin'`, function(err,res2){
         if(err){
             console.log(err.message);
-            res.send(err.message);
+            res.send("<h1>" + err.message + "</h1>");
         }
         else{
             res.render("viewAdmin",{arr:res2.rows})
@@ -279,7 +277,7 @@ app.post('/view_complaints_warden',function(req,res){
     client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res){
         if(err){
             console.log(err.message);
-            res.send(err.message);
+            res.send("<h1>" + err.message + "</h1>");
         }
     })
     res.redirect('/view_complaints_warden');

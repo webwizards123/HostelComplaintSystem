@@ -8,7 +8,8 @@
     
     <!-- Style sheets CSS and bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles_student.css">
+    <!-- <link rel="stylesheet" href="dashboard.css"> -->
+    <link rel="stylesheet" href="styles_admin.css">
 
     <!-- Javascript and jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -18,7 +19,7 @@
 </head>
 <body>
     
-<nav class="navbar navbar-expand-md justify-content-between">
+<nav class="navbar navbar-expand-md navbar-light justify-content-between">
     
     <div class="inst">
         <a class="navbar-brand" href="#"><img class="profile" src="iit1.jfif" alt=""></a>
@@ -32,14 +33,15 @@
         <ul class="navbar-nav ml-auto ms-auto">
             <li class="nav-item active">
                 <div class="right">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/adminHome">Home</a>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <div class="right">
-                    <a class="nav-link" href="#">Show Complaints</a>
+                    <a class="nav-link" href="/view_complaints_admin">View Complaint</a>
                 </div>
             </li>
+           
             <li class="nav-item">
                 <div class="right">
                     <a class="nav-link" href="#">Notice</a>
@@ -53,13 +55,12 @@
 </nav>
 
 <h1>
-    Hello Dear Warden.........
+    Hello <%=name%>
 </h1>
-
 <div class="details">
-    <div class="item">Total pending complaints</div>
+    <div class="item">Hope you are fine</div>
+    
 </div>
-
-<button class="btn btn-lg btn-dark tic"><a href="/view_complaints_warden" id="view_complaints">Show Complaints</a></button>
+<button class="btn btn-lg btn-dark tic"><a href="/view_complaints_admin" id="raise">Show Complaints</a></button>
 </body>
 </html>
