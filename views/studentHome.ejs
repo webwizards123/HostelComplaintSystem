@@ -32,12 +32,12 @@
         <ul class="navbar-nav ml-auto ms-auto">
             <li class="nav-item active">
                 <div class="right">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/studentHome">Home</a>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="right">
-                    <a class="nav-link" href="#">Raise Ticket</a>
+                    <a class="nav-link" href="/generate_complaint">Raise Ticket</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -53,12 +53,12 @@
 </nav>
 
 <h1>
-    Hello User
+    Hello <%=name%>
 </h1>
 
 <div class="details">
-    <div class="item">Enrollment No: Enrollment_no </div>
-    <div class="item">Name: Name </div>
+    <div class="item">Room No: <%=roomno%>  </div>
+    <div class="item">Hostel Name: <%=hname%> </div>
 </div>
 
 <button class="btn btn-lg btn-dark tic"><a href="/generate_complaint" id="raise">Raise Ticket</a></button>
