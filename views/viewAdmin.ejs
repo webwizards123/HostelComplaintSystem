@@ -66,6 +66,9 @@
             <th>
                 Category
             </th>
+            <th>
+                ID
+            </th>
             
             <th>
                 Title
@@ -78,14 +81,19 @@
             <th>
                 Status
             </th>
+            <th>
+                Hostel Id
+            </th>
         </tr>
         
             <% arr.forEach(function(ele){ %>
                 <tr>
                     <td><%= ele.category %></td>
+                    <td><%= ele.student_ref_id %></td>
                     <td><%= ele.title %></td>
                     <td><%= ele.description %></td>
                     <td><%= ele.status %></td>
+                    <td><%= ele.hostel_ref_id %></td>
                 </tr>
             <% }) %>
     </table>
