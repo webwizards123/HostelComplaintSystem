@@ -58,9 +58,37 @@
     </div>
 </nav>
     <br><br><br>
+    <form action="/view_complaints_warden" method="post">
+        Sort On Basis Of:<br>
+        Room No: <input type="radio" name="cat" id="" value="room_no">
+        ID: <input type="radio" name="cat" id="" value="student_ref_id">
+        Category:  <input type="radio" name="cat" id="" value="category"><br>
+
+        Type:<br>
+        Asc: <input type="radio" name="type" id="" value="ASC">
+        Desc: <input type="radio" name="type" id="" value="DESC"><br>
+        <button type="submit" name="submit" value="sort">SORT</button>
+    </form>
+    <br><br>
+    <form action="/view_complaints_warden" method="post">
+        FILTER BASED ON:
+        Category Water <input type="radio" name="cat" value="Water">
+        Category Food <input type="radio" name="cat" value="Food">
+        Category Electricity <input type="radio" name="cat" value="Electricity">
+        Category Hygiene <input type="radio" name="cat" value="Hygine"><br>
+        <button type="submit" name="submit" value="filter"> FILTER</button>
+    </form>
+    <br><br>
     <table>
 
         <tr>
+            <th>
+                Id
+            </th>
+
+            <th>
+                Room No
+            </th>
             <th>
                 Category
             </th>
@@ -83,13 +111,15 @@
         
             <% arr.forEach(function(ele){ %>
                 <tr>
+                    <td><%= ele.student_ref_id %></td>
+                    <td><%= ele.room_no %></td>
                     <td><%= ele.category %></td>
                     <td><%= ele.title %></td>
                     <td><%= ele.description %></td>
                     <td><%= ele.status %></td>
                     <td>
                         <form action="/view_complaints_warden" method="post">
-                            <button type="submit" name="cid" value=<%=ele.complaint_id%> >Escalate</button>
+                            <button type="submit" name="submit" value=<%=ele.complaint_id%> >Escalate</button>
                         </form>
                     </td>
                 </tr>
