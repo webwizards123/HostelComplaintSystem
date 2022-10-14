@@ -1,6 +1,8 @@
 body{
     background-color: #FFECEF;
     text-align: center;
+    background: url("bgimg3.png") ;
+
 }
 img.profile{
     border-radius: 100%;
@@ -42,4 +44,10 @@ button.tic{
 }
 a#raise{
     color: white;
+}
+
+.logoutbtn{
+    border-radius: 100%;
+    background-color: #f79e9e;
+    margin-top: 8%;
 }

@@ -1,6 +1,8 @@
 body{
     background-color: #FFECEF;
     text-align: center;
+    background: url("bgimg3.png") ;
+
 }
 img.profile{
     border-radius: 100%;

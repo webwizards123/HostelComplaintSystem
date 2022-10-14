@@ -1,8 +1,10 @@
 body{
     background-color: #FFECEF;
+    background: url("bgimg2.jpg") ;
+    
 }
 .cardbody-color{
-  background-color: #FFECEF;
+  background-color: #FF577F;
 }
 
 .btn-color{
@@ -16,9 +18,9 @@ body{
   object-fit:cover;
 }
 
-.cardbody-color{
+/* .cardbody-color{
   background-color: #FFECEF;
-}
+} */
 
 a{
   text-decoration: none;

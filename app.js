@@ -36,6 +36,18 @@ app.get("/studentHome",function(req,res){
     
 });
 
+//
+app.post("/studentHome",function(req,res){
+
+    var lo = req.body.logoutbtn;
+
+    if(lo == 'logout'){
+        res.redirect("/");
+        globalid = '';
+    }
+
+})
+
 app.get("/adminHome",function(req,res){
     client.query(`select admin_name from admin where admin_id='${globalid}'`, function (err, res2) {
         if (err) {
@@ -78,7 +90,7 @@ const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"Abhisql",
+    password:"abhijeet",
     database:"Hosteldb"
 })
 client.connect();
@@ -215,8 +227,15 @@ app.post("/generate_complaint",function(req,res){
     let desc = req.body.desc;
     let hid;
     let rno;
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
     client.query(`select hostel_ref_id,room_no from student where student_id = '${globalid}'`,(err1,res1)=>{
-        if(err1) console.log(err1.message);
+        if(err1) {
+            console.log(err1.message)
+            res.send(err1.message);
+        }
         else{
             hid = res1.rows[0].hostel_ref_id;
             rno= res1.rows[0].room_no;
@@ -231,6 +250,7 @@ app.post("/generate_complaint",function(req,res){
             })
         } 
     })
+}
 })
 
 //view my complaints
