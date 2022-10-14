@@ -300,7 +300,7 @@ app.post('/view_complaints_warden',function(req,res){
     }
     else{
         var cid = req.body.submit;
-        client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res){
+        client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res2){
             if(err){
                 console.log(err.message);
                 res.send("<h1>" + err.message + "</h1>");
@@ -310,6 +310,31 @@ app.post('/view_complaints_warden',function(req,res){
             }
         })
     }
+})
+
+app.post("/view_my_complaints", function(req,res){
+    let id = req.body.ack;
+    client.query(`delete from complaints where complaint_id = '${id}'`, function(err,res2){
+        if(err){
+            res.send("<h1>"+err.message+"</h1>");
+        }
+        else{
+            res.redirect("/view_my_complaints");
+        }
+    })
+})
+app.post("/view_complaints_warden2", function(req,res){
+    id = req.body.submit;
+    st = req.body.status;
+
+    client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function(err,res2){
+        if(err){
+            res.send("<h1>"+err.message+"</h1>");
+        }
+        else{
+            res.redirect("/view_complaints_warden");
+        }
+    })
 })
 
 app.listen(3000, function () {

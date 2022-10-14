@@ -107,6 +107,9 @@
             <th>
                 Escalate
             </th>
+            <th>
+                Change Status
+            </th>
         </tr>
         
             <% arr.forEach(function(ele){ %>
@@ -120,6 +123,17 @@
                     <td>
                         <form action="/view_complaints_warden" method="post">
                             <button type="submit" name="submit" value=<%=ele.complaint_id%> >Escalate</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/view_complaints_warden2" method="post">
+                            <label for="status">Choose Status</label>
+                            <select name="status" id="status">
+                                <option value="Solved">Solved</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Pending">Pending</option>
+                            </select><br>
+                            <button type="submit" name="submit" value=<%=ele.complaint_id%>>Change</button>
                         </form>
                     </td>
                 </tr>
