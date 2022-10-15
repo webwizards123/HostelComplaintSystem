@@ -57,61 +57,64 @@
     </div>
 </nav>
     <br><br><br>
-    <table>
-        <tr>
-            <th>
-                Complaint_id
-            </th>
-            
-            <th>
-                Category
-            </th>
-            <th>
-                title
-            </th>
-            
-            <th>
-                description
-            </th>
-            
-            <th>
-                student_ref_id
-            </th>
-
-            <th>
-                hostel_ref_id
-            </th>
-            
-            <th>
-                status
-            </th>
-            
-            <th>
-                room_no
-            </th>
-            <th>
-                Acknowledgement
-            </th>
-            
-        </tr>
-        
-        <% arr.forEach(function(ele){ %>
+    <table class="styled-table">
+        <thead>
             <tr>
-                <td><%= ele.complaint_id %></td>
-                <td><%= ele.category %></td>
-                <td><%= ele.title %></td>
-                <td><%= ele.description %></td>
-                <td><%= ele.student_ref_id %></td>
-                <td><%= ele.hostel_ref_id %></td>
-                <td><%= ele.status %></td>
-                <td><%= ele.room_no %></td>
-                <td>
-                    <form action="/view_my_complaints" method="post">
-                        <button type="submit" name="ack" value=<%=ele.complaint_id%> >Acknowledge</button>
-                    </form>
-                </td>
+                <th>
+                    Complaint_id
+                </th>
+                
+                <th>
+                    Category
+                </th>
+                <th>
+                    title
+                </th>
+                
+                <th>
+                    description
+                </th>
+                
+                <th>
+                    student_ref_id
+                </th>
+
+                <th>
+                    hostel_ref_id
+                </th>
+                
+                <th>
+                    status
+                </th>
+                
+                <th>
+                    room_no
+                </th>
+                <th>
+                    Acknowledgement
+                </th>
             </tr>
-        <% }) %>
+        </thead>
+        
+        <tbody>
+            <% arr.forEach(function(ele){ %>
+                <tr>
+                    <td><%= ele.complaint_id %></td>
+                    <td><%= ele.category %></td>
+                    <td><%= ele.title %></td>
+                    <td><%= ele.description %></td>
+                    <td><%= ele.student_ref_id %></td>
+                    <td><%= ele.hostel_ref_id %></td>
+                    <td><%= ele.status %></td>
+                    <td><%= ele.room_no %></td>
+                    <td>
+                        <form action="/view_my_complaints" method="post">
+                            <button type="submit" name="ack" value=<%=ele.complaint_id%> >Acknowledge</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
 
     </table>
    
