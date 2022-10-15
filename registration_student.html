@@ -15,11 +15,11 @@
     <div class="container">
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <h2 class="text-center text-dark mt-5">Students Registration</h2>
+            <h2 class="text-center  mt-5 heading">Student Registration</h2>
             <div class="text-center mb-5 text-dark"></div>
             <div class="cardmy-5">
 
-              <form class="card-body cardbody-color p-lg-5" action="/register_student" method="post">
+              <form class="card-body cardbody-color p-lg-5 hovernow" action="/register_student" method="post">
 
                 <div class="text-center">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvYiw3pXHtUwd_rM15lgfiLbaFFP9u9L3ng&usqp=CAU" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
@@ -41,16 +41,17 @@
                     placeholder="Lastname" name="lname">
                 </div>
                 <div class="mb-3">
-                  <input type="text" class="form-control"  aria-describedby="emailHelp"
-                    placeholder="Gender: M/F" name="gender">
+                  Gender <br>
+                  <label for="male"> Male <input type="radio" name="gender" value="M" id="male"></label><br>
+                  <label for="female">Female <input type="radio" name="gender" value="F" id="female"></label><br>
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control"  aria-describedby="emailHelp"
                     placeholder="Hostel Id" name="hostelid">
                 </div>
                 <div class="mb-3">
-                  <input type="tel" class="form-control"  aria-describedby="emailHelp"
-                    placeholder="Contact No" name="contno" pattern="[0-9]{10}" required>
+                  <input type="text" class="form-control"  aria-describedby="emailHelp"
+                    placeholder="Contact No" name="contno">
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control"  aria-describedby="emailHelp"

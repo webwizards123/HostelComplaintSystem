@@ -1,10 +1,16 @@
 body{
+    
     background-color: #FFECEF;
     background: url("bgimg2.jpg") ;
     
 }
 .cardbody-color{
   background-color: #FF577F;
+  border: 1px solid;
+  padding: 10px;
+  /*box-shadow: 5px 10px 18px rgb(21, 17, 18); */
+  margin-bottom: 40px;
+  border-radius: 2px;
 }
 
 .btn-color{
@@ -18,10 +24,25 @@ body{
   object-fit:cover;
 }
 
-/* .cardbody-color{
-  background-color: #FFECEF;
-} */
+.hovernow{
+  transition: box-shadow 0.3s;
+  border-color: black;
+}
+
+.hovernow:hover {
+  box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.8);
+}
+
 
 a{
   text-decoration: none;
+}
+
+.heading{
+  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+  font-size: xx-large;
+  color: rgb(255, 255, 255);
+  text-shadow: 5px 5px 8px #1c1c1c;
 }
