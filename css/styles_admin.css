@@ -2,6 +2,7 @@ body{
     background-color: #FFECEF;
     text-align: center;
     background: url("bgimg3.png") ;
+    
 
 }
 img.profile{
@@ -55,3 +56,16 @@ a#raise{
     color: white;
 }
 
+.gradiant{
+    background-image: linear-gradient(to right, #fdd9d9,#ffa9d8,#d866a5);
+}
+
+.stud-details{
+  
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: xx-large;
+    /* color: rgb(255, 255, 255); */
+    /* text-shadow: 2px 2px 8px #eb6a6a; */
+      
+}
