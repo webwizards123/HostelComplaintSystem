@@ -1,9 +1,12 @@
 body{
     background-color: #FFECEF;
     text-align: center;
-    background: url("bgimg3.png") ;
-    
-
+    /* background: url("bgimg3.png") ; */
+    background-image: linear-gradient( #fdd9d9,#ffa9d8,#d866a5);
+    /* background-image: linear-gradient( to right ,#fdd9d9,#ffa9d8,#d866a5); */
+}
+html{
+    /* height: 100%; */
 }
 img.profile{
     border-radius: 100%;
@@ -17,7 +20,9 @@ a.navbar-link{
     text-align: right;
 }
 nav{
-    background-color: #372948;
+
+    background-color: #d866a5;
+
 }
 a.nav-link{
     color: #FFCACA;
@@ -48,7 +53,10 @@ a#raise{
 }
 
 .gradiant{
-    background-image: linear-gradient(to right, #fdd9d9,#ffa9d8,#d866a5);
+    /* background-image: linear-gradient(to right,#fdd9d9,#ffa9d8,); */
+    /* border-bottom: 1px solid; */
+    background-color: #d866a5;
+
 }
 
 .stud-details{
@@ -59,4 +67,77 @@ a#raise{
     /* color: rgb(255, 255, 255); */
     /* text-shadow: 2px 2px 8px #eb6a6a; */
       
+}
+
+.wardenhome{
+
+    background: url("bgimg3.png") ;
+
+}
+
+.styled-table {
+    border-collapse: collapse;
+    /* margin: 25px auto; */
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+.styled-table thead tr {
+    background-color: #8c3bf0;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #f9ecec;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #fcd9d9;
+}
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #fca5a5;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #8c3bf0;
+}
+
+.buttoncss{
+    background-color: #ff6fb2;
+}
+.changestatus{
+    width: 400px;
+}
+
+select{
+    display: inline-block;
+    padding: 9.5px;
+    border-radius: 5%;
+    margin-right: 10%;
+}
+
+.buttonbg{
+    background-color: rgb(252, 252, 50);
+}
+
+.tablecss:hover{
+    box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.8);
+}
+
+.tablecss{
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 40px;
+    transition: box-shadow 0.3s;
+    
+}
+
+th{
+    text-align: center;
 }

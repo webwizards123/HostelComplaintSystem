@@ -1,8 +1,8 @@
 body{
     background-color: #FFECEF;
     text-align: center;
-    /* background: url("bgimg3.png") ; */
-    background-image: linear-gradient( #fdd9d9,#ffa9d8,#d866a5);
+    background: url("bgimg3.png") ;
+    /* background-image: linear-gradient( #fdd9d9,#ffa9d8,#d866a5); */
 }
 img.profile{
     border-radius: 100%;

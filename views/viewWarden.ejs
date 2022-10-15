@@ -3,7 +3,7 @@
 
 <style>
     table, th, td ,tr{
-        border:1px solid black;
+        border: none;
         padding: 20px;
     }
 </style>
@@ -23,8 +23,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </head>
-<body>
-    <nav class="navbar navbar-expand-md justify-content-between">
+<body class="viewwarden">
+    <nav class="navbar navbar-expand-md justify-content-between navcolor">
     
     <div class="inst">
         <a class="navbar-brand" href="#"><img class="profile" src="iit1.jfif" alt=""></a>
@@ -79,66 +79,71 @@
         <button type="submit" name="submit" value="filter"> FILTER</button>
     </form>
     <br><br>
-    <table>
-
-        <tr>
-            <th>
-                Id
-            </th>
-
-            <th>
-                Room No
-            </th>
-            <th>
-                Category
-            </th>
-            
-            <th>
-                Title
-            </th>
-            
-            <th>
-                Description
-            </th>
-            
-            <th>
-                Status
-            </th>
-            <th>
-                Escalate
-            </th>
-            <th>
-                Change Status
-            </th>
-        </tr>
-        
-            <% arr.forEach(function(ele){ %>
+    <div class="tablecss">
+        <table class="styled-table">
+            <thead >
                 <tr>
-                    <td><%= ele.student_ref_id %></td>
-                    <td><%= ele.room_no %></td>
-                    <td><%= ele.category %></td>
-                    <td><%= ele.title %></td>
-                    <td><%= ele.description %></td>
-                    <td><%= ele.status %></td>
-                    <td>
-                        <form action="/view_complaints_warden" method="post">
-                            <button type="submit" name="submit" value=<%=ele.complaint_id%> >Escalate</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/view_complaints_warden2" method="post">
-                            <label for="status">Choose Status</label>
-                            <select name="status" id="status">
-                                <option value="Solved">Solved</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Pending">Pending</option>
-                            </select><br>
-                            <button type="submit" name="submit" value=<%=ele.complaint_id%>>Change</button>
-                        </form>
-                    </td>
+                    <th>
+                        Id
+                    </th>
+
+                    <th>
+                        Room No
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    
+                    <th>
+                        Title
+                    </th>
+                    
+                    <th>
+                        Description
+                    </th>
+                    
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Escalate
+                    </th>
+                    <th class="changestatus">
+                        Change Status
+                    </th>
                 </tr>
-            <% }) %>
-    </table>
+            </thead>
+            <tbody>
+                    <% arr.forEach(function(ele){ %>
+                    <tr>
+                        <td><%= ele.student_ref_id %></td>
+                        <td><%= ele.room_no %></td>
+                        <td><%= ele.category %></td>
+                        <td><%= ele.title %></td>
+                        <td><%= ele.description %></td>
+                        <td><%= ele.status %></td>
+                        <td>
+                            <form action="/view_complaints_warden" method="post">
+                                <button type="submit" class="btn btn-large buttoncss" name="submit" value=<%=ele.complaint_id%> >Escalate</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/view_complaints_warden2" method="post">
+                                <select name="status" id="status">
+                                    <option value="Solved">Choose Status</option>
+                                    <option value="Solved">Solved</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                                <button type="submit" name="submit" class="btn btn-large buttonbg" value=<%=ele.complaint_id%>>Change</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+
+        </table>
+    </div>
    
 </body>
 </html>
