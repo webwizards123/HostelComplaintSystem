@@ -41,17 +41,16 @@
                     placeholder="Lastname" name="lname">
                 </div>
                 <div class="mb-3">
-                  Gender <br>
-                  <label for="male"> Male <input type="radio" name="gender" value="M" id="male"></label><br>
-                  <label for="female">Female <input type="radio" name="gender" value="F" id="female"></label><br>
+                  <input type="text" class="form-control"  aria-describedby="emailHelp"
+                    placeholder="Gender: M/F" name="gender">
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control"  aria-describedby="emailHelp"
                     placeholder="Hostel Id" name="hostelid">
                 </div>
                 <div class="mb-3">
-                  <input type="text" class="form-control"  aria-describedby="emailHelp"
-                    placeholder="Contact No" name="contno">
+                  <input type="tel" class="form-control"  aria-describedby="emailHelp"
+                    placeholder="Contact No" name="contno" pattern="[0-9]{10}" required>
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control"  aria-describedby="emailHelp"
