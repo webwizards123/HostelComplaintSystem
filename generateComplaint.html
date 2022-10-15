@@ -55,10 +55,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-        <h2 class="text-center text-dark mt-5">Generate Complaint</h2>
-        <div class="cardmy-5">
+        <h2 class="text-center mt-5 heading">Generate Complaint</h2>
+        <div class="cardmy-5 generatecss">
 
-    <form class="card-body cardbody-color p-lg-5" action="/generate_complaint" method="post">
+    <form class="card-body p-lg-5 generatecss" action="/generate_complaint" method="post">
 
                 <div class="text-center">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvYiw3pXHtUwd_rM15lgfiLbaFFP9u9L3ng&usqp=CAU" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
@@ -67,11 +67,22 @@
 
                 
                 <div class="mb-3">
-                  Category <br>
+                  <!-- Category <br>
                   <label for="ele">Electricity <input type="radio" name="cat" value="Electricity" id="ele"></label>
                   <label for="wtr">Water <input type="radio" name="cat" value="Water" id="wtr"></label>
                   <label for="hyg">Hygiene <input type="radio" name="cat" value="Hygiene" id="hyg"></label>
-                  <label for="foo">Food <input type="radio" name="cat" value="Food" id="foo"></label>
+                  <label for="foo">Food <input type="radio" name="cat" value="Food" id="foo"></label> -->
+                  <!-- <label for="cat">Choose Category</label> -->
+                            <select class="selectcss" name="cat" id="status">
+
+                                <option value="Electricity">Choose Category</option>
+                               
+                                <option value="Electricity">Electricity</option>
+                                <option value="Water">Water</option>
+                                <option value="Hygiene">Hygiene</option>
+                                <option value="Food">Food</option>
+
+                            </select>
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control"  aria-describedby="emailHelp"

@@ -1,6 +1,7 @@
 body{
     background-color: #FFECEF;
     text-align: center;
+    background-image: url("bgimg3.png");
 }
 .cardbody-color{
   background-color: #FFECEF;
@@ -18,7 +19,8 @@ body{
 }
 
 .cardbody-color{
-  background-color: #FFECEF;
+  /* background-color: #FFECEF; */
+  margin-bottom: 40px;
 }
 
 a{
@@ -53,3 +55,37 @@ h1{
     text-align: center;
     color: #251B37;
 }
+
+.generatecss:hover{
+  box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.8);
+}
+
+.generatecss{
+  transition: box-shadow 0.3s;
+}
+
+textarea{
+  /* background-color: rgb(254, 128, 153); */
+  border-radius: 2%;
+  border: none;
+}
+
+.heading{
+  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+  font-size: xx-large;
+  color: rgb(255, 255, 255);
+  text-shadow: 5px 5px 8px #1c1c1c;
+  /* margin-bottom: 10%; */
+}
+
+.generatecss{
+  margin-bottom: 40px;
+}
+
+.selectcss{
+  border-radius: 5px;
+  padding: 3px;
+}
+
