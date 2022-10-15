@@ -1,8 +1,8 @@
 body{
     background-color: #FFECEF;
     text-align: center;
-    background: url("bgimg3.png") ;
-
+    /* background: url("bgimg3.png") ; */
+    background-image: linear-gradient( #fdd9d9,#ffa9d8,#d866a5);
 }
 img.profile{
     border-radius: 100%;
@@ -64,4 +64,52 @@ a#raise{
 
 .gradiant{
     background-image: linear-gradient(to right, #fdd9d9,#ffa9d8,#d866a5);
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #8c3bf0;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #f9ecec;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #fcd9d9;
+}
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #fca5a5;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #8c3bf0;
+}
+
+.Pending{
+    width: 110px;
+    background-color: rgb(241, 11, 11);
+}
+.In{
+    width: 110px;
+    background-color: rgb(246, 246, 36);
+}
+.Solved{
+    width: 110px;
+    background-color: rgb(33, 244, 33);
+}
+.s-ack{
+    background-color: #817dfd;
 }
