@@ -69,3 +69,16 @@ a#raise{
     /* text-shadow: 2px 2px 8px #eb6a6a; */
       
 }
+
+.Pending{
+    width: 110px;
+    background-color: rgb(241, 11, 11);
+}
+.In{
+    width: 110px;
+    background-color: rgb(246, 246, 36);
+}
+.Solved{
+    width: 110px;
+    background-color: rgb(33, 244, 33);
+}

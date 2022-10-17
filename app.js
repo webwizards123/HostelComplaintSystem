@@ -90,7 +90,7 @@ const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"abhijeet",
+    password:"Abhisql",
     database:"Hosteldb"
 })
 client.connect();
@@ -239,7 +239,7 @@ app.post("/generate_complaint",function(req,res){
         else{
             hid = res1.rows[0].hostel_ref_id;
             rno= res1.rows[0].room_no;
-            client.query(`insert into complaints(category,description,student_ref_id,hostel_ref_id,status,title,room_no) values('${cat}','${desc}','${globalid}','${hid}','Pending','${title}',${rno})`, function (err2, res2) {
+            client.query(`insert into complaints(category,description,student_ref_id,hostel_ref_id,status,title,room_no,auth,ack) values('${cat}','${desc}','${globalid}','${hid}','Pending','${title}',${rno},'Warden','No')`, function (err2, res2) {
                 if (err2) {
                     console.log(err2.message);
                 }
@@ -292,6 +292,46 @@ app.get('/view_complaints_admin',function(req,res){
     })
 })
 
+app.post('/view_complaints_admin',function(req,res){
+    if (req.body.submit == 'sort') {
+        let cat = req.body.cat;
+        let type = req.body.type;
+        client.query(`select * from Complaints where auth='Admin' ORDER BY ${cat} ${type}`, function (err, res2) {
+            if (err) {
+                console.log(err.message);
+                res.send(err.message);
+            }
+            else {
+                res.render("viewAdmin", { arr: res2.rows })
+            }
+        })
+    }
+    else if (req.body.submit == 'filter') {
+        let cat = req.body.cat;
+        client.query(`select * from Complaints where auth='Admin' and category='${cat}'`, function (err, res2) {
+            if (err) {
+                console.log(err.message);
+                res.send(err.message);
+            }
+            else {
+                res.render("viewAdmin", { arr: res2.rows })
+            }
+        })
+    }
+    else {
+        id = req.body.submit;
+        st = req.body.status;
+        client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function (err, res2) {
+            if (err) {
+                res.send("<h1>" + err.message + "</h1>");
+            }
+            else {
+                res.redirect("/view_complaints_admin");
+            }
+        })
+    }
+})
+
 app.post('/view_complaints_warden',function(req,res){
     if(req.body.submit=='sort'){
         let cat = req.body.cat;
@@ -331,18 +371,6 @@ app.post('/view_complaints_warden',function(req,res){
         })
     }
 })
-
-app.post("/view_my_complaints", function(req,res){
-    let id = req.body.ack;
-    client.query(`delete from complaints where complaint_id = '${id}'`, function(err,res2){
-        if(err){
-            res.send("<h1>"+err.message+"</h1>");
-        }
-        else{
-            res.redirect("/view_my_complaints");
-        }
-    })
-})
 app.post("/view_complaints_warden2", function(req,res){
     id = req.body.submit;
     st = req.body.status;
@@ -353,6 +381,18 @@ app.post("/view_complaints_warden2", function(req,res){
         }
         else{
             res.redirect("/view_complaints_warden");
+        }
+    })
+})
+
+app.post("/view_my_complaints", function(req,res){
+    let id = req.body.ack;
+    client.query(`delete from complaints where complaint_id = '${id}'`, function(err,res2){
+        if(err){
+            res.send("<h1>"+err.message+"</h1>");
+        }
+        else{
+            res.redirect("/view_my_complaints");
         }
     })
 })
