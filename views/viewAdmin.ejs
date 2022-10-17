@@ -60,6 +60,26 @@
     </div>
 </nav>
     <br><br><br>
+    <form action="/view_complaints_admin" method="post">
+        Sort On Basis Of:<br>
+        Room No: <input type="radio" name="cat" id="" value="room_no">
+        ID: <input type="radio" name="cat" id="" value="student_ref_id">
+        Category:  <input type="radio" name="cat" id="" value="category"><br>
+
+        Type:<br>
+        Asc: <input type="radio" name="type" id="" value="ASC">
+        Desc: <input type="radio" name="type" id="" value="DESC"><br>
+        <button type="submit" name="submit" value="sort">SORT</button>
+    </form>
+    <br><br>
+    <form action="/view_complaints_admin" method="post">
+        FILTER BASED ON:
+        Category Water <input type="radio" name="cat" value="Water">
+        Category Food <input type="radio" name="cat" value="Food">
+        Category Electricity <input type="radio" name="cat" value="Electricity">
+        Category Hygiene <input type="radio" name="cat" value="Hygine"><br>
+        <button type="submit" name="submit" value="filter"> FILTER</button>
+    </form>
     <table>
 
         <tr>
@@ -69,7 +89,6 @@
             <th>
                 ID
             </th>
-            
             <th>
                 Title
             </th>
@@ -84,6 +103,12 @@
             <th>
                 Hostel Id
             </th>
+            <th>
+                Room No
+            </th>
+            <th>
+                Change Status
+            </th>
         </tr>
         
             <% arr.forEach(function(ele){ %>
@@ -92,8 +117,21 @@
                     <td><%= ele.student_ref_id %></td>
                     <td><%= ele.title %></td>
                     <td><%= ele.description %></td>
-                    <td><%= ele.status %></td>
+                    <td><button class="<%= ele.status %> btn btn-large"><%= ele.status %></button></td>
+                    
                     <td><%= ele.hostel_ref_id %></td>
+                    <td><%= ele.room_no %></td>
+                    <td>
+                        <form action="/view_complaints_admin" method="post">
+                            <select name="status" id="status">
+                                <option value="Solved">Choose Status</option>
+                                <option value="Solved">Solved</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Pending">Pending</option>
+                            </select>
+                            <button type="submit" class="btn btn-large btn-dark" name="submit" class="btn btn-large buttonbg" value=<%=ele.complaint_id%>>Change</button>
+                        </form>
+                    </td>
                 </tr>
             <% }) %>
     </table>

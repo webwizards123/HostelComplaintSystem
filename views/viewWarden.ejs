@@ -121,7 +121,8 @@
                         <td><%= ele.category %></td>
                         <td><%= ele.title %></td>
                         <td><%= ele.description %></td>
-                        <td><%= ele.status %></td>
+                        <td><button class="<%= ele.status %> btn btn-large"><%= ele.status %></button></td>
+                        
                         <td>
                             <form action="/view_complaints_warden" method="post">
                                 <button type="submit" class="btn btn-large buttoncss" name="submit" value=<%=ele.complaint_id%> >Escalate</button>
