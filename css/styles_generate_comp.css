@@ -89,3 +89,23 @@ textarea{
   padding: 3px;
 }
 
+
+.logoutbtn{
+    
+  background-color: #d866a5;
+  border-radius: 2%;
+  margin-top: 8%;
+  margin-bottom: 5px;
+  border: none;
+  padding: 2px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #FFCACA;
+  transition: box-shadow 0.3s;
+
+}
+.logoutbtn:hover{
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.8);
+  background-color: #f79e9e;
+  color: black;
+}

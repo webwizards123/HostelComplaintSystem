@@ -55,7 +55,9 @@
             </li>
         </ul>
         <div class="right">
-            <a href="https://www.google.com/" ><img src="profile1.jpg" class="profile" alt=""></a>    
+            <form action="/logout" method="post">
+                <button class="logoutbtn" name="logoutbtn" value="logout">Log Out</button>
+            </form>   
         </div>
     </div>
 </nav>
@@ -80,7 +82,8 @@
         Category Hygiene <input type="radio" name="cat" value="Hygine"><br>
         <button type="submit" name="submit" value="filter"> FILTER</button>
     </form>
-    <table>
+    <div class="tablecss">
+    <table class="styled-table">
 
         <tr>
             <th>
@@ -106,7 +109,7 @@
             <th>
                 Room No
             </th>
-            <th>
+            <th class="changestatus">
                 Change Status
             </th>
         </tr>
@@ -129,12 +132,13 @@
                                 <option value="In Progress">In Progress</option>
                                 <option value="Pending">Pending</option>
                             </select>
-                            <button type="submit" class="btn btn-large btn-dark" name="submit" class="btn btn-large buttonbg" value=<%=ele.complaint_id%>>Change</button>
+                            <button type="submit" class="btn btn-large buttonbg" name="submit" class="btn btn-large buttonbg" value=<%=ele.complaint_id%>>Change</button>
                         </form>
                     </td>
                 </tr>
             <% }) %>
     </table>
-   
+    </div>
+    
 </body>
 </html>
