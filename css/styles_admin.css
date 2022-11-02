@@ -82,3 +82,89 @@ a#raise{
     width: 110px;
     background-color: rgb(33, 244, 33);
 }
+
+/*  */
+.styled-table {
+    border-collapse: collapse;
+    /* margin: 25px auto; */
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+.styled-table thead tr {
+    background-color: #8c3bf0;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #f9ecec;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #886efa;
+}
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #b7aefb;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #8c3bf0;
+}
+
+.buttoncss{
+    background-color: #ff6fb2;
+}
+.changestatus{
+    width: 400px;
+}
+
+select{
+    display: inline-block;
+    padding: 9.5px;
+    border-radius: 5%;
+    margin-right: 10%;
+}
+
+.buttonbg{
+    background-color: rgb(252, 252, 50);
+}
+.tablecss:hover{
+    box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.8);
+}
+
+.tablecss{
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 40px;
+    transition: box-shadow 0.3s;
+    
+}
+
+th{
+    text-align: center;
+}
+.logoutbtn{
+    
+    background-color: #d866a5;
+    border-radius: 2%;
+    margin-top: 8%;
+    margin-bottom: 5px;
+    border: none;
+    padding: 2px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #FFCACA;
+    transition: box-shadow 0.3s;
+
+}
+.logoutbtn:hover{
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.8);
+    background-color: #f79e9e;
+    color: black;
+}

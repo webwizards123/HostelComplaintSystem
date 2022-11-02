@@ -37,13 +37,13 @@ app.get("/studentHome",function(req,res){
 });
 
 //
-app.post("/studentHome",function(req,res){
+app.post("/logout",function(req,res){
 
     var lo = req.body.logoutbtn;
 
     if(lo == 'logout'){
-        res.redirect("/");
         globalid = '';
+        res.redirect("/");
     }
 
 })
@@ -90,7 +90,7 @@ const client = new Client({
     host:"localhost",
     user:"postgres",
     port:5432,
-    password:"Abhisql",
+    password:"abhijeet",
     database:"Hosteldb"
 })
 client.connect();
@@ -258,6 +258,10 @@ app.post("/generate_complaint",function(req,res){
 
 // var myid = 'satvik12';
 app.get('/view_my_complaints', function(req,res){
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
     client.query(`select * from complaints where student_ref_id = '${globalid}'`,function(err2,res2){
         if(err2){
             console.log(err2.message);
@@ -266,11 +270,16 @@ app.get('/view_my_complaints', function(req,res){
             res.render("list", {arr:res2.rows});    
         }
     })
+    }
 })
 
 
 app.get('/view_complaints_warden',function(req,res){
-    client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}')`, function(err,res2){
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
+        client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}')`, function(err,res2){
         if(err){
             console.log(err.message);
             res.send(err.message);
@@ -279,122 +288,149 @@ app.get('/view_complaints_warden',function(req,res){
             res.render("viewWarden",{arr:res2.rows})
         }
     })
+    }
 })
+
+
 app.get('/view_complaints_admin',function(req,res){
-    client.query(`select * from Complaints where auth='Admin'`, function(err,res2){
-        if(err){
-            console.log(err.message);
-            res.send("<h1>" + err.message + "</h1>");
-        }
-        else{
-            res.render("viewAdmin",{arr:res2.rows})
-        }
-    })
-})
-
-app.post('/view_complaints_admin',function(req,res){
-    if (req.body.submit == 'sort') {
-        let cat = req.body.cat;
-        let type = req.body.type;
-        client.query(`select * from Complaints where auth='Admin' ORDER BY ${cat} ${type}`, function (err, res2) {
-            if (err) {
-                console.log(err.message);
-                res.send(err.message);
-            }
-            else {
-                res.render("viewAdmin", { arr: res2.rows })
-            }
-        })
-    }
-    else if (req.body.submit == 'filter') {
-        let cat = req.body.cat;
-        client.query(`select * from Complaints where auth='Admin' and category='${cat}'`, function (err, res2) {
-            if (err) {
-                console.log(err.message);
-                res.send(err.message);
-            }
-            else {
-                res.render("viewAdmin", { arr: res2.rows })
-            }
-        })
-    }
-    else {
-        id = req.body.submit;
-        st = req.body.status;
-        client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function (err, res2) {
-            if (err) {
-                res.send("<h1>" + err.message + "</h1>");
-            }
-            else {
-                res.redirect("/view_complaints_admin");
-            }
-        })
-    }
-})
-
-app.post('/view_complaints_warden',function(req,res){
-    if(req.body.submit=='sort'){
-        let cat = req.body.cat;
-        let type = req.body.type;
-        client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}') ORDER BY ${cat} ${type}`, function (err, res2) {
-            if (err) {
-                console.log(err.message);
-                res.send(err.message);
-            }
-            else {
-                res.render("viewWarden", { arr: res2.rows })
-            }
-        })
-    }
-    else if(req.body.submit=='filter'){
-        let cat = req.body.cat;
-        client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}' and category='${cat}')`, function (err, res2) {
-            if (err) {
-                console.log(err.message);
-                res.send(err.message);
-            }
-            else {
-                res.render("viewWarden", { arr: res2.rows })
-            }
-        })
+    if(globalid==''){
+        res.redirect("/");
     }
     else{
-        var cid = req.body.submit;
-        client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res2){
+        client.query(`select * from Complaints where auth='Admin'`, function(err,res2){
             if(err){
                 console.log(err.message);
                 res.send("<h1>" + err.message + "</h1>");
             }
             else{
-                res.redirect('/view_complaints_warden');
+                res.render("viewAdmin",{arr:res2.rows})
             }
         })
+    }
+})
+
+app.post('/view_complaints_admin',function(req,res){
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
+        if (req.body.submit == 'sort') {
+            let cat = req.body.cat;
+            let type = req.body.type;
+            client.query(`select * from Complaints where auth='Admin' ORDER BY ${cat} ${type}`, function (err, res2) {
+                if (err) {
+                    console.log(err.message);
+                    res.send(err.message);
+                }
+                else {
+                    res.render("viewAdmin", { arr: res2.rows })
+                }
+            })
+        }
+        else if (req.body.submit == 'filter') {
+            let cat = req.body.cat;
+            client.query(`select * from Complaints where auth='Admin' and category='${cat}'`, function (err, res2) {
+                if (err) {
+                    console.log(err.message);
+                    res.send(err.message);
+                }
+                else {
+                    res.render("viewAdmin", { arr: res2.rows })
+                }
+            })
+        }
+        else {
+            id = req.body.submit;
+            st = req.body.status;
+            client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function (err, res2) {
+                if (err) {
+                    res.send("<h1>" + err.message + "</h1>");
+                }
+                else {
+                    res.redirect("/view_complaints_admin");
+                }
+            })
+        }
+    }
+})
+
+app.post('/view_complaints_warden',function(req,res){
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
+        if(req.body.submit=='sort'){
+            let cat = req.body.cat;
+            let type = req.body.type;
+            client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}') ORDER BY ${cat} ${type}`, function (err, res2) {
+                if (err) {
+                    console.log(err.message);
+                    res.send(err.message);
+                }
+                else {
+                    res.render("viewWarden", { arr: res2.rows })
+                }
+            })
+        }
+        else if(req.body.submit=='filter'){
+            let cat = req.body.cat;
+            client.query(`select * from Complaints where auth='Warden' and hostel_ref_id = (select hostel_id from hostel where warden_ref_id = '${globalid}' and category='${cat}')`, function (err, res2) {
+                if (err) {
+                    console.log(err.message);
+                    res.send(err.message);
+                }
+                else {
+                    res.render("viewWarden", { arr: res2.rows })
+                }
+            })
+        }
+        else{
+            var cid = req.body.submit;
+            client.query(`update complaints set auth='Admin' where complaint_id = '${cid}'`,function(err,res2){
+                if(err){
+                    console.log(err.message);
+                    res.send("<h1>" + err.message + "</h1>");
+                }
+                else{
+                    res.redirect('/view_complaints_warden');
+                }
+            })
+        }
     }
 })
 app.post("/view_complaints_warden2", function(req,res){
     id = req.body.submit;
     st = req.body.status;
-
-    client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function(err,res2){
-        if(err){
-            res.send("<h1>"+err.message+"</h1>");
-        }
-        else{
-            res.redirect("/view_complaints_warden");
-        }
-    })
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
+        client.query(`update complaints set status = '${st}' where complaint_id = '${id}'`, function(err,res2){
+            if(err){
+                res.send("<h1>"+err.message+"</h1>");
+            }
+            else{
+                res.redirect("/view_complaints_warden");
+            }
+        })
+    }
 })
 
 app.post("/view_my_complaints", function(req,res){
     let id = req.body.ack;
-    client.query(`delete from complaints where complaint_id = '${id}'`, function(err,res2){
-        if(err){
-            res.send("<h1>"+err.message+"</h1>");
-        }
-        else{
-            res.redirect("/view_my_complaints");
-        }
-    })
+    if(globalid==''){
+        res.redirect("/");
+    }
+    else{
+        client.query(`delete from complaints where complaint_id = '${id}'`, function(err,res2){
+            if(err){
+                res.send("<h1>"+err.message+"</h1>");
+            }
+            else{
+                res.redirect("/view_my_complaints");
+            }
+        })
+    }
 })
 
 app.listen(3000, function () {
